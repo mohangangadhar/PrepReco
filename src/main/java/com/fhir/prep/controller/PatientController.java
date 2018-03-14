@@ -5,8 +5,7 @@ import org.hl7.fhir.dstu3.model.Patient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ca.uhn.fhir.rest.client.api.IGenericClient;
-import ca.uhn.fhir.context.FhirContext;
+
 
 @RestController
 public class PatientController {
@@ -20,8 +19,8 @@ public class PatientController {
     }*/
 
    @RequestMapping("/patient")
-    public String getPatientById(@RequestParam(value="id") String id){
-        Patient patient = RestHelper.get().read().resource(Patient.class).withId(id).execute();;
+    public String getPatientById(@RequestParam(value="id") Integer id){
+        Patient patient = RestHelper.get().read().resource(Patient.class).withId(String.valueOf(id)).execute();
         return patient.getNameFirstRep().getNameAsSingleString();
     }
 
